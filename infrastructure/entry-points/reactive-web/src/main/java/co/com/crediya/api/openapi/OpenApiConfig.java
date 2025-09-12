@@ -19,15 +19,14 @@ public class OpenApiConfig {
                         .description("Microservicio encargado de generar Reportes.")
                         .contact(new io.swagger.v3.oas.models.info.Contact()
                                 .name("DANIEL PEREZ VITOLA")
-                                .email("dapevi97@gmail.com")));
-                // Define seguridad global con bearerAuth // TODO: poner cuando se implemente seguridad
-/*                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                                .email("dapevi97@gmail.com")))
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth",
                                 new SecurityScheme()
                                         .name("bearerAuth")
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
-                                        .bearerFormat("JWT")));*/
+                                        .bearerFormat("JWT")));
     }
 }
