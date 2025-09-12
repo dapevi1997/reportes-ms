@@ -19,10 +19,10 @@ import software.amazon.awssdk.services.sqs.model.Message;
 import java.net.URI;
 import java.util.function.Function;
 
-@Configuration
+//@Configuration
 public class SQSConfig {
 
-    @Bean
+    //@Bean
     public SQSListener sqsListener(SqsAsyncClient client, SQSProperties properties, Function<Message, Mono<Void>> fn) {
         return SQSListener.builder()
                 .client(client)
@@ -32,7 +32,7 @@ public class SQSConfig {
                 .start();
     }
 
-    @Bean
+    //@Bean
     public SqsAsyncClient configSqs(SQSProperties properties, MetricPublisher publisher) {
         return SqsAsyncClient.builder()
                 .endpointOverride(resolveEndpoint(properties))

@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.sqs.model.Message;
 
 import java.util.function.Function;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class SQSProcessor implements Function<Message, Mono<Void>> {
     // private final MyUseCase myUseCase;
@@ -18,7 +18,7 @@ public class SQSProcessor implements Function<Message, Mono<Void>> {
     @Override
     public Mono<Void> apply(Message message) {
         try {
-            Long prestamosAprobados = objectMapper.readValue(message.body(), Long.class);
+            Long cantidadPrestamosAprobados = objectMapper.readValue(message.body(), Long.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
