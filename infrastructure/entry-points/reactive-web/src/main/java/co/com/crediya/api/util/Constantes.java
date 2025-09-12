@@ -15,4 +15,14 @@ public class Constantes {
     public static class MensajesError {
         public static final String TIPO_REPORTE_INVALIDO = "Tipo de reporte inválido";
     }
+
+    @UtilityClass
+    public static class ParametrosQuery {
+        public static final String TIPO_REPORTE = "tipo";
+    }
+
+    @UtilityClass
+    public static class MensajesLogger {
+        public static final String TIPO_REPORTE_NO_PERMITIDO = "Tipo de reporte no permitido";
+    }
 }
