@@ -1,0 +1,52 @@
+server:
+  port: ${APP_PUERTO}
+spring:
+  application:
+    name: "ReportesMS"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+entrypoint:
+  sqs:
+    region: ${ENTRY_SQS_REGION}
+    #endpoint: "http://localhost:4566"
+    queueUrl: ${ENTRY_SQS_URL_QUEUE}
+    accessKey: ${ENTRY_SQS_ACCESS_KEY}
+    secretKey: ${ENTRY_SQS_SECRET_KEY}
+    waitTimeSeconds: 20
+    maxNumberOfMessages: 10
+    visibilityTimeoutSeconds: 10
+    numberOfThreads: 1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:8080"
+rutas:
+  caminos:
+    reportes: "/api/v1/reportes"
+springdoc:
+  swagger-ui:
+    path: "/swagger-docs"
+  api-docs:
+    path: "/api-docs"
+    groups:
+      enabled: true
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
+aws:
+  region: ${DYNAMO_REGION}
+  accessKey: ${DYNAMO_ACCESS_KEY}
+  secretKey: ${DYNAMO_SECRET_KEY}
+  dynamodb:
+    #endpoint: "http://localhost:8000"
