@@ -1,0 +1,28 @@
+package co.com.crediya.api.util;
+
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class Constantes {
+
+    @UtilityClass
+    public static class TipoReporte {
+        public final String CANTIDAD = "cantidad";
+        public final String MONTO = "monto";
+    }
+
+    @UtilityClass
+    public static class MensajesError {
+        public static final String TIPO_REPORTE_INVALIDO = "Tipo de reporte inválido";
+    }
+
+    @UtilityClass
+    public static class ParametrosQuery {
+        public static final String TIPO_REPORTE = "tipo";
+    }
+
+    @UtilityClass
+    public static class MensajesLogger {
+        public static final String TIPO_REPORTE_NO_PERMITIDO = "Tipo de reporte no permitido";
+    }
+}

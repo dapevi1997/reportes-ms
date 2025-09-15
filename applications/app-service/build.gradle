@@ -1,6 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+	implementation project(':logger')
 	implementation project(':json-mapper')
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'
 	implementation project(':dynamo-db')
@@ -28,5 +29,6 @@ jar {
 
 bootJar {
     // Sets output jar name
+    //destinationDirectory = layout.settingsDirectory.dir("deployment")
     archiveFileName = "${project.getParent().getName()}.${archiveExtension.get()}"
 }
