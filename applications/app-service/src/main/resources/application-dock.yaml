@@ -14,8 +14,6 @@ entrypoint:
     region: ${ENTRY_SQS_REGION}
     #endpoint: "http://localhost:4566"
     queueUrl: ${ENTRY_SQS_URL_QUEUE}
-    accessKey: ${ENTRY_SQS_ACCESS_KEY}
-    secretKey: ${ENTRY_SQS_SECRET_KEY}
     waitTimeSeconds: 20
     maxNumberOfMessages: 10
     visibilityTimeoutSeconds: 10
@@ -42,11 +40,7 @@ springdoc:
     groups:
       enabled: true
 jwt:
-  secret: ${JWT_SECRET}
   expiration: ${JWT_EXPIRATION}
 aws:
   region: ${DYNAMO_REGION}
-  accessKey: ${DYNAMO_ACCESS_KEY}
-  secretKey: ${DYNAMO_SECRET_KEY}
-  dynamodb:
     #endpoint: "http://localhost:8000"
