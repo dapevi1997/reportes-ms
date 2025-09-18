@@ -34,7 +34,7 @@ rutas:
     reportes: "/api/v1/reportes"
 springdoc:
   swagger-ui:
-    path: "/swagger-docs"
+    path: "/api/v1/reportes/swagger-docs"
   api-docs:
     path: "/api-docs"
     groups:
