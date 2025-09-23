@@ -4,8 +4,9 @@ import co.com.bancolombia.secretsmanager.api.GenericManagerAsync;
 import co.com.bancolombia.secretsmanager.api.exceptions.SecretException;
 import co.com.bancolombia.secretsmanager.config.AWSSecretsManagerConfig;
 import co.com.bancolombia.secretsmanager.connector.AWSSecretManagerConnectorAsync;
-import co.com.crediya.api.seguridad.util.JwtProperties;
+import co.com.crediya.jwthelper.JwtProperties;
 import co.com.crediya.config.dto.JwtSecretDto;
+import org.springframework.context.annotation.Profile;
 import software.amazon.awssdk.regions.Region;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ public class SecretsConfig {
     private Long expiration;
 
     @Bean
+    @Profile("dock")
     public JwtProperties jwtProperties(GenericManagerAsync secretManager) throws SecretException {
         JwtSecretDto secret = secretManager.getSecret("jwt", JwtSecretDto.class).block();
         assert secret != null;
