@@ -49,7 +49,7 @@ aws:
     #endpoint: "http://localhost:8000"
 adapter:
   restconsumer:
-    timeout: 36000
+    timeout: ${TIMEOUT_REST_CONSUMER}
     hostSolicitudes: ${HOST_SOLICITUDES}
     hostAutenticacion: ${HOST_AUTENTICACION}
     portSolicitudes: ${PORT_SOLICITUDES}
