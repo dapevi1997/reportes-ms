@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Reporte de Solicitudes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background: #f4f4f4;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .resumen {
+            margin-top: 20px;
+            padding: 12px;
+            background: #f4f4f4;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<h2>Reporte de Solicitudes</h2>
+
+<!-- Tabla de solicitudes -->
+<table>
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Fecha de Creación</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="solicitud : ${solicitudes}">
+        <td th:text="${solicitud.email}">correo@example.com</td>
+        <td th:text="${solicitud.monto}">1000</td>
+        <td th:text="${solicitud.estado}">APROBADO</td>
+        <td th:text="${solicitud.fechaCreacion}">2025-09-19</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Resumen de aprobaciones -->
+<div class="resumen">
+    <p><strong>Monto total aprobado:</strong> <span th:text="${montoTotalAprobado}">0</span></p>
+    <p><strong>Número total de aprobados:</strong> <span th:text="${numeroTotalAprobados}">0</span></p>
+</div>
+</body>
+</html>

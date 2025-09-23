@@ -14,8 +14,6 @@ entrypoint:
     region: ${ENTRY_SQS_REGION}
     #endpoint: "http://localhost:4566"
     queueUrl: ${ENTRY_SQS_URL_QUEUE}
-    accessKey: ${ENTRY_SQS_ACCESS_KEY}
-    secretKey: ${ENTRY_SQS_SECRET_KEY}
     waitTimeSeconds: 20
     maxNumberOfMessages: 10
     visibilityTimeoutSeconds: 10
@@ -25,6 +23,9 @@ management:
     web:
       exposure:
         include: "health,prometheus"
+  health:
+    circuitbreakers:
+      enabled: true
   endpoint:
     health:
       probes:
@@ -36,17 +37,41 @@ rutas:
     reportes: "/api/v1/reportes"
 springdoc:
   swagger-ui:
-    path: "/swagger-docs"
+    path: "/api/v1/reportes/swagger-docs"
   api-docs:
-    path: "/api-docs"
+    path: "/api/v1/reportes/api-docs"
     groups:
       enabled: true
 jwt:
-  secret: ${JWT_SECRET}
   expiration: ${JWT_EXPIRATION}
 aws:
   region: ${DYNAMO_REGION}
-  accessKey: ${DYNAMO_ACCESS_KEY}
-  secretKey: ${DYNAMO_SECRET_KEY}
-  dynamodb:
     #endpoint: "http://localhost:8000"
+adapter:
+  restconsumer:
+    timeout: 36000
+    hostSolicitudes: ${HOST_SOLICITUDES}
+    hostAutenticacion: ${HOST_AUTENTICACION}
+    portSolicitudes: ${PORT_SOLICITUDES}
+    portAutenticacion: ${PORT_AUTENTICACION}
+resilience4j:
+  circuitbreaker:
+    instances:
+      testGet:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: "2s"
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: "10s"
+      testPost:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: "2s"
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: "10s"

@@ -32,3 +32,9 @@ include ':json-mapper'
 project(':json-mapper').projectDir = file('./infrastructure/helpers/json-mapper')
 include ':logger'
 project(':logger').projectDir = file('./infrastructure/helpers/logger')
+include ':scheduler'
+project(':scheduler').projectDir = file('./infrastructure/entry-points/scheduler')
+include ':rest-consumer'
+project(':rest-consumer').projectDir = file('./infrastructure/driven-adapters/rest-consumer')
+include ':jwt-helper'
+project(':jwt-helper').projectDir = file('./infrastructure/helpers/jwt-helper')

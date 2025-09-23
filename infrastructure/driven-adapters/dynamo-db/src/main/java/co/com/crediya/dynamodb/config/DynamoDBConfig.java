@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.WebIdentityTokenFileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.metrics.MetricPublisher;
 import software.amazon.awssdk.regions.Region;
@@ -17,10 +14,6 @@ import java.net.URI;
 
 @Configuration
 public class DynamoDBConfig {
-    @Value("${aws.accessKey}")
-    private String accessKey;
-    @Value(("${aws.secretKey}"))
-    private String secretKey;
 
     @Bean
     @Profile({"local"})
@@ -39,13 +32,20 @@ public class DynamoDBConfig {
     @Profile({"dev", "dock"})
     public DynamoDbAsyncClient amazonDynamoDBAsync(MetricPublisher publisher, @Value("${aws.region}") String region) {
         return DynamoDbAsyncClient.builder()
-                .credentialsProvider(
-                        StaticCredentialsProvider.create(
-                                AwsBasicCredentials.create(accessKey, secretKey)
-                        )
-                )
+                .credentialsProvider(getProviderChain())
                 .region(Region.of(region))
                 .overrideConfiguration(o -> o.addMetricPublisher(publisher))
+                .build();
+    }
+
+    private AwsCredentialsProviderChain getProviderChain() {
+        return AwsCredentialsProviderChain.builder()
+                .addCredentialsProvider(EnvironmentVariableCredentialsProvider.create())
+                .addCredentialsProvider(SystemPropertyCredentialsProvider.create())
+                .addCredentialsProvider(WebIdentityTokenFileCredentialsProvider.create())
+                .addCredentialsProvider(ProfileCredentialsProvider.create())
+                .addCredentialsProvider(ContainerCredentialsProvider.builder().build())
+                .addCredentialsProvider(InstanceProfileCredentialsProvider.create())
                 .build();
     }
 
