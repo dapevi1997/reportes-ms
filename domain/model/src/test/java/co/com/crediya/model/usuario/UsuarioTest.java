@@ -86,7 +86,7 @@ class UsuarioTest {
                 .build();
 
         Usuario copia = original.toBuilder()
-                .name("Carla") // solo cambio el nombre
+                .name("Carla")
                 .build();
 
         assertEquals(5L, copia.getIdUser());

@@ -85,11 +85,11 @@ class SolicitudTest {
                 .build();
 
         Solicitud copia = original.toBuilder()
-                .monto(BigDecimal.valueOf(2000)) // cambiamos solo el monto
+                .monto(BigDecimal.valueOf(2000))
                 .build();
 
-        assertEquals("original@crediya.com", copia.getEmail()); // se conserva
-        assertEquals(BigDecimal.valueOf(2000), copia.getMonto()); // se cambia
-        assertEquals(12, copia.getPlazo()); // se conserva
+        assertEquals("original@crediya.com", copia.getEmail());
+        assertEquals(BigDecimal.valueOf(2000), copia.getMonto());
+        assertEquals(12, copia.getPlazo());
     }
 }
